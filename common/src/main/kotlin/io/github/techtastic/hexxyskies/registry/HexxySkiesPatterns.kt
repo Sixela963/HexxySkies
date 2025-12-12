@@ -7,8 +7,10 @@ import io.github.techtastic.hexxyskies.casting.patterns.OpShipFromPos
 import io.github.techtastic.hexxyskies.platform.RegistryUtils
 
 object HexxySkiesPatterns {
+    // Base pattern: wdewwedw EAST
+
     val SHIP_FROM_POS = RegistryUtils.registerPattern("ship_from_pos") { ActionRegistryEntry(
-        HexPattern.fromAngles("aqqa", HexDir.WEST),
+        HexPattern.fromAngles("wdewwedw", HexDir.EAST),
         OpShipFromPos
     ) }
 
