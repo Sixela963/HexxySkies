@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "MixinOpEntityPos"
   ],
   "injectors": {
     "defaultRequire": 1
