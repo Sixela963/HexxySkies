@@ -8,20 +8,23 @@ import net.minecraft.nbt.Tag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import org.valkyrienskies.core.api.ships.LoadedServerShip
+import org.valkyrienskies.core.api.ships.properties.ShipId
 import org.valkyrienskies.core.api.util.GameTickOnly
 import org.valkyrienskies.mod.api.getShipById
 
-public class ShipIota @OptIn(GameTickOnly::class) constructor(val ship: LoadedServerShip) : Iota(TYPE,ship) {
+class ShipIota(val shipId: ShipId, val slug: String?) : Iota(TYPE, shipId) {
+    fun getShip(level: ServerLevel) = level.getShipById(shipId)
+
     override fun isTruthy(): Boolean = true
 
     @OptIn(GameTickOnly::class)
-    override fun toleratesOther(that: Iota?): Boolean = (that as? ShipIota)?.let { that.ship == this.ship } ?: false
+    override fun toleratesOther(that: Iota?): Boolean = (that as? ShipIota)?.let { that.shipId == this.shipId } ?: false
 
     @OptIn(GameTickOnly::class)
     override fun serialize(): Tag {
         val tag = CompoundTag()
-        tag.putLong("hexxyskies\$shipId", ship.id)
-        ship.slug?.let { tag.putString("hexxyskies\$slug", it) }
+        tag.putLong("hexxyskies\$shipId", shipId)
+        slug?.let { tag.putString("hexxyskies\$slug", it) }
         return tag
     }
 
@@ -34,7 +37,8 @@ public class ShipIota @OptIn(GameTickOnly::class) constructor(val ship: LoadedSe
             ): ShipIota? {
                 val tag = tag as CompoundTag
                 val shipId = tag.getLong("hexxyskies\$shipId")
-                return world?.let { level -> (level.getShipById(shipId) as? LoadedServerShip)?.let(::ShipIota) }
+                return world?.let { level -> level.getShipById(shipId)?.let { ship -> ShipIota(ship.id, ship.slug) } }
+                    ?: ShipIota(shipId, if (tag.contains("hexxyskies\$slug")) tag.getString("hexxyskies\$slug") else null)
             }
 
             override fun display(tag: Tag): Component = Component

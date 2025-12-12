@@ -49,7 +49,7 @@ dependencies {
     include(modApi("dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"))
 
     //VS2
-    modApi("org.valkyrienskies:valkyrienskies-120-fabric:${rootProject.vs2_version}") {
+    modCompileOnly("org.valkyrienskies:valkyrienskies-120-fabric:${rootProject.vs2_version}") {
         exclude group: "com.simibubi.create"
         exclude group: "net.createmod.ponder"
         // Excluding sodium since it crashes with vs2 for some reason
@@ -67,6 +67,7 @@ dependencies {
     implementation("org.valkyrienskies.core:internal:${rootProject.vscore_version}") {
         exclude group: 'org.joml', module: ''
     }
+    modRuntimeOnly files("${rootDir}\\libs\\valkyrienskies-120-fabric-2.4.0+ab9d3d62ee.jar")
 
     // Kotlin
     modImplementation("net.fabricmc:fabric-language-kotlin:${rootProject.kotlin_fabric}")

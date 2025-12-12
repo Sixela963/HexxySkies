@@ -57,7 +57,7 @@ dependencies {
     //VS2 Dependencies. The latest VS2 and VSCore versions can be retrieved from the Valkyrien Skies Github repository.
     //The version tag is usually the major version, followed by the first 10 characters of the git commit hash.
     //The VSCore version tag can be grabbed directly from the gradle.properties file in the Valkyrien skies repo.
-    modApi("org.valkyrienskies:valkyrienskies-120-forge:${rootProject.vs2_version}") { transitive = false
+    modCompileOnly("org.valkyrienskies:valkyrienskies-120-forge:${rootProject.vs2_version}") { transitive = false
         exclude group: 'org.valkyrienskies.core', module: ''
         exclude group: "com.simibubi"
         exclude group: "io.github.fabricators_of_create"
@@ -73,6 +73,7 @@ dependencies {
     implementation("org.valkyrienskies.core:internal:${rootProject.vscore_version}") { transitive = false
         exclude group: 'org.joml', module: ''
     }
+    modRuntimeOnly files("${rootDir}\\libs\\valkyrienskies-120-forge-2.4.0+ab9d3d62ee.jar")
 
     // Kotlin
     implementation("thedarkcolour:kotlinforforge:${rootProject.kotlin_forge}")
