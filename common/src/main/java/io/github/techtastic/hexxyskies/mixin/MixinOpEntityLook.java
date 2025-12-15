@@ -20,7 +20,6 @@ import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.util.List;
 
-@Pseudo
 @Mixin(OpEntityLook.class)
 public class MixinOpEntityLook {
     @Shadow

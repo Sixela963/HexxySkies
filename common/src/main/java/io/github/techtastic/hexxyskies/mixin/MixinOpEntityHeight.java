@@ -18,7 +18,6 @@ import org.valkyrienskies.core.api.ships.ServerShip;
 
 import java.util.List;
 
-@Pseudo
 @Mixin(OpEntityHeight.class)
 public class MixinOpEntityHeight {
     @Shadow

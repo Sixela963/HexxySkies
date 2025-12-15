@@ -30,7 +30,6 @@ import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.util.List;
 
-@Pseudo
 @Mixin(OpAddMotion.class)
 public abstract class MixinOpAddMotion {
     @Shadow
