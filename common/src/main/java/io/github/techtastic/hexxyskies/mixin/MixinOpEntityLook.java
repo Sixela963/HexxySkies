@@ -5,11 +5,11 @@ import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota;
 import io.github.techtastic.hexxyskies.casting.iota.ShipIota;
 import io.github.techtastic.hexxyskies.casting.mishaps.MishapShipNotLoaded;
+import io.github.techtastic.hexxyskies.util.AssertionUtils;
 import io.github.techtastic.hexxyskies.util.MixinHelper;
 import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import at.petrak.hexcasting.common.casting.actions.queryentity.OpEntityLook;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,6 +30,7 @@ public class MixinOpEntityLook {
     private void hexxyskies$useShip(List<? extends Iota> args, CastingEnvironment env, CallbackInfoReturnable<List<Iota>> cir) {
         if (MixinHelper.INSTANCE.getShipOrEntityIota(args, 0, argc) instanceof ShipIota iota) {
             if (iota.getShip(env.getWorld()) instanceof ServerShip ship) {
+                AssertionUtils.INSTANCE.assertShipInRange(env, ship);
                 Vector3d look = ship.getTransform().getShipToWorld().transformDirection(new Vector3d(0, 0, 1));
                 cir.setReturnValue(List.of(new Vec3Iota(VectorConversionsMCKt.toMinecraft(look))));
             }

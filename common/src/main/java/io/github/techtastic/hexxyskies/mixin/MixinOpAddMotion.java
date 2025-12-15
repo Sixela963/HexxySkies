@@ -2,12 +2,9 @@ package io.github.techtastic.hexxyskies.mixin;
 
 import at.petrak.hexcasting.api.casting.OperatorUtils;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
-import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.casting.castables.SpellAction;
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
-import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
 import at.petrak.hexcasting.api.casting.iota.Iota;
-import at.petrak.hexcasting.api.casting.iota.Vec3Iota;
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.common.casting.actions.spells.OpAddMotion;
 import io.github.techtastic.hexxyskies.casting.iota.ShipIota;
@@ -20,7 +17,6 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -56,7 +52,7 @@ public abstract class MixinOpAddMotion {
                         (long) motionForCost * MediaConstants.DUST_UNIT,
                         List.of(
                                 new ParticleSpray(
-                                        VectorConversionsMCKt.toMinecraft(ship.getTransform().getPositionInWorld().add(0.0, ship.getWorldAABB().maxY() - ship.getWorldAABB().minY(), 0.0, new Vector3d())),
+                                        VectorConversionsMCKt.toMinecraft(ship.getTransform().getPositionInWorld().add(0.0, MixinHelper.INSTANCE.getHeight(ship), 0.0, new Vector3d())),
                                         motion.normalize(),
                                         0.0,
                                         0.1,

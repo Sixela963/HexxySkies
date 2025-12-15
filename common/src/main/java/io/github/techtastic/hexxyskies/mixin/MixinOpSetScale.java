@@ -1,14 +1,16 @@
 package io.github.techtastic.hexxyskies.mixin;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.ParticleSpray;
+import at.petrak.hexcasting.api.casting.castables.SpellAction;
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.api.casting.iota.Iota;
-import at.petrak.hexcasting.api.casting.iota.Vec3Iota;
-import at.petrak.hexcasting.common.casting.actions.queryentity.OpEntityPos;
+import at.petrak.hexcasting.interop.pehkui.OpSetScale;
 import io.github.techtastic.hexxyskies.casting.iota.ShipIota;
 import io.github.techtastic.hexxyskies.casting.mishaps.MishapShipNotLoaded;
+import io.github.techtastic.hexxyskies.nonmixin.ShipScaleSpell;
 import io.github.techtastic.hexxyskies.util.AssertionUtils;
 import io.github.techtastic.hexxyskies.util.MixinHelper;
-import org.joml.Vector3dc;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,23 +22,25 @@ import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.util.List;
 
-@Mixin(OpEntityPos.class)
-public class MixinOpEntityPos {
+@Mixin(OpSetScale.class)
+public class MixinOpSetScale {
     @Shadow
     @Final
-    private int argc;
-
-    @Shadow
-    @Final
-    private boolean feet;
+    private static int argc;
 
     @Inject(method = "execute", at= @At("HEAD"), remap = false, cancellable = true)
-    private void hexxyskies$useShip(List<? extends Iota> args, CastingEnvironment env, CallbackInfoReturnable<List<Iota>> cir) {
+    private void hexxyskies$useShip(List<? extends Iota> args, CastingEnvironment env, CallbackInfoReturnable<SpellAction.Result> cir) {
         if (MixinHelper.INSTANCE.getShipOrEntityIota(args, 0, argc) instanceof ShipIota iota) {
             if (iota.getShip(env.getWorld()) instanceof ServerShip ship) {
+                double scale = OperatorUtils.getDoubleBetween(args, 1, 1/10d, 10, argc);
                 AssertionUtils.INSTANCE.assertShipInRange(env, ship);
-                Vector3dc pos = feet ? ship.getTransform().getPositionInWorld() : ship.getTransform().getPositionInShip();
-                cir.setReturnValue(List.of(new Vec3Iota(VectorConversionsMCKt.toMinecraft(pos))));
+
+                cir.setReturnValue(new SpellAction.Result(
+                        new ShipScaleSpell(env.getWorld(), ship, scale),
+                        50000L,
+                        List.of(ParticleSpray.burst(VectorConversionsMCKt.toMinecraft(ship.getTransform().getPositionInWorld()), scale, 40)),
+                        1
+                ));
             }
             else throw new MishapShipNotLoaded();
         }

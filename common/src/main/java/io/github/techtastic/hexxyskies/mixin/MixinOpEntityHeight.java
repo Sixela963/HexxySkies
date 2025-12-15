@@ -6,10 +6,10 @@ import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.casting.actions.queryentity.OpEntityHeight;
 import io.github.techtastic.hexxyskies.casting.iota.ShipIota;
 import io.github.techtastic.hexxyskies.casting.mishaps.MishapShipNotLoaded;
+import io.github.techtastic.hexxyskies.util.AssertionUtils;
 import io.github.techtastic.hexxyskies.util.MixinHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,7 +28,8 @@ public class MixinOpEntityHeight {
     private void hexxyskies$useShip(List<? extends Iota> args, CastingEnvironment env, CallbackInfoReturnable<List<Iota>> cir) {
         if (MixinHelper.INSTANCE.getShipOrEntityIota(args, 0, argc) instanceof ShipIota iota) {
             if (iota.getShip(env.getWorld()) instanceof ServerShip ship) {
-                cir.setReturnValue(List.of(new DoubleIota(ship.getShipAABB().maxY() - ship.getShipAABB().minY())));
+                AssertionUtils.INSTANCE.assertShipInRange(env, ship);
+                cir.setReturnValue(List.of(new DoubleIota(MixinHelper.INSTANCE.getHeight(ship))));
             }
             else throw new MishapShipNotLoaded();
         }

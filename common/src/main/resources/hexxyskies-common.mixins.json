@@ -7,10 +7,13 @@
   ],
   "mixins": [
     "MixinOpAddMotion",
+    "MixinOpBlink",
     "MixinOpEntityHeight",
     "MixinOpEntityLook",
     "MixinOpEntityPos",
-    "MixinOpEntityVelocity"
+    "MixinOpEntityVelocity",
+    "MixinOpGetScale",
+    "MixinOpSetScale"
   ],
   "injectors": {
     "defaultRequire": 1
