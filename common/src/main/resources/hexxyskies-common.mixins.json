@@ -6,7 +6,11 @@
   "client": [
   ],
   "mixins": [
-    "MixinOpEntityPos"
+    "MixinOpAddMotion",
+    "MixinOpEntityHeight",
+    "MixinOpEntityLook",
+    "MixinOpEntityPos",
+    "MixinOpEntityVelocity"
   ],
   "injectors": {
     "defaultRequire": 1
