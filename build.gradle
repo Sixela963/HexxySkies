@@ -1,8 +1,10 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
-    id 'org.jetbrains.kotlin.jvm' version '1.9.22' apply false
+    id 'com.gradleup.shadow' version '8.3.6' apply false
+    id "org.jetbrains.kotlin.jvm" version "2.0.0" apply false
 }
 
 architectury {
@@ -10,6 +12,32 @@ architectury {
 }
 
 allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url = "https://maven.blamejared.com"
+        }
+        maven {
+            url = "https://maven.shedaniel.me/"
+        }
+        maven {
+            url = uri("https://maven.hexxy.media")
+        }
+        maven {
+            url = "https://api.modrinth.com/maven"
+        }
+        maven {
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+        maven {
+            name = "Valkyrien Skies Internal"
+            url = 'https://maven.valkyrienskies.org'
+        }
+    }
+
     group = rootProject.maven_group
     version = rootProject.mod_version
 }
@@ -18,7 +46,7 @@ subprojects {
     apply plugin: 'dev.architectury.loom'
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
-    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'kotlin'
 
     base {
         // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
@@ -31,45 +59,15 @@ subprojects {
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
-        maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
-        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge config api port
-        maven {
-            url "https://maven.blamejared.com"
-        }
-        maven {
-            name = "Valkyrien Skies Internal"
-            url = project.vs_maven_url ?: 'https://maven.valkyrienskies.org'
-            if (project.vs_maven_username && project.vs_maven_password) {
-                credentials {
-                    username = project.vs_maven_username
-                    password = project.vs_maven_password
-                }
-            }
-        }
+    }
 
-        exclusiveContent {
-            forRepository {
-                maven {
-                    name = "Modrinth"
-                    url = "https://api.modrinth.com/maven"
-                }
-            }
-            filter {
-                includeGroup "maven.modrinth"
-            }
-        }
+    loom {
+        silentMojangMappingsLicense()
     }
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.officialMojangMappings()
-//        mappings loom.layered {
-//            mappings "net.fabricmc:yarn:$rootProject.yarn_mappings:v2"
-//            mappings file("${rootProject.rootDir}/override.tiny")
-//        }
-
-        // Used by MoreIotas
-        implementation group: "org.jblas", name: "jblas", version: "1.2.5"
     }
 
     java {
@@ -82,12 +80,15 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlin {
-        jvmToolchain(17)
-    }
-
     tasks.withType(JavaCompile).configureEach {
         it.options.release = 17
+    }
+
+    tasks.withType(KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "17"
+            freeCompilerArgs += "-Xjvm-default=all"
+        }
     }
 
     // Configure Maven publishing.

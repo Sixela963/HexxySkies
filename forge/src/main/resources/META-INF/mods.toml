@@ -1,35 +1,85 @@
-modLoader = "javafml"
-loaderVersion = "[47,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+modLoader = "kotlinforforge"
+loaderVersion = "[4,)"
+issueTrackerURL = "https://github.com/TechTastic/hexsky/issues"
+displayURL = "https://techtastic.github.io/hexsky/v/latest/master/en_us/"
+license = "MIT"
 
 [[mods]]
-modId = "hexsky"
+modId = "hexxyskies"
 version = "${version}"
 displayName = "Hexxy Skies"
-authors = "Me!"
+authors = ["TechTastic", "walksanator"]
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Hexcasting x Valkyrien Skies Interop
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
-[[dependencies.hexsky]]
+[[dependencies.hexxyskies]]
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.hexsky]]
+[[dependencies.hexxyskies]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.hexsky]]
+[[dependencies.hexxyskies]]
 modId = "architectury"
 mandatory = true
 versionRange = "[9.2.14,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "valkyrienskies"
+mandatory = true
+versionRange = "[2.4.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "hexcasting"
+mandatory = true
+versionRange = "[0.11.3,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "moreiotas"
+mandatory = false
+versionRange = "[0.1.1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "complexhex"
+mandatory = false
+versionRange = "[0.1.3,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "hexal"
+mandatory = false
+versionRange = "[0.3.1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "hexodus"
+mandatory = false
+versionRange = "[1.0.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "hexical"
+mandatory = false
+versionRange = "[2.0.0,)"
 ordering = "AFTER"
 side = "BOTH"

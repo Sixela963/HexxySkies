@@ -5,62 +5,58 @@ requires = [
 ]
 build-backend = "hatchling.build"
 
-# project metadata
-
 [project]
-name = "hexdoc-hexsky"
-description = "Python web book docgen and hexdoc plugin for Hexxy Skies."
+name = "hexdoc-hexxyskies"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+description = "hexdoc plugin for Hexxy Skies's web book."
 readme = "doc/README.md"
 authors = [
-    { name="walksanator" },
+    { name="TechTastic" },
+    { name="walksanator"}
 ]
-keywords = ["hexdoc"]
+keywords = [
+    "hexdoc",
+]
 requires-python = ">=3.11"
-dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.urls]
-Homepage = "https://walksanator.github.io/hexsky/"
-Source = "https://github.com/walksanator/hexsky"
-
-# Gradle version/deps
-
-[tool.hatch.version]
-scheme = "gradle"
-source = "gradle-properties"
-py-path = "doc/src/hexdoc_hexsky/__version__.py"
-key = "mod_version"
+Homepage = "https://techtastic.github.io/HexxySkies/"
+Source = "https://github.com/TechTastic/HexxySkies"
 
 [tool.hatch.metadata.hooks.gradle-properties]
 dependencies = [
-    { package="hexdoc-hexcasting", op="~=", py-version="1.0.dev20", key="hexcasting_version" },
+    "hexdoc~=1!0.1.0a24",
+    { package="hexdoc-hexcasting", op="~=", py-version="1.0.dev21", key="hexcasting_version" },
+    { package="hexdoc-hexodus", op="~=", py-version="1.0.dev", key="hexodus_version" },
+    { package="hexdoc-minecraft", op="~=", py-version="1.0.dev", key="minecraft_version" },
 ]
 
 [tool.hatch.metadata.hooks.gradle-properties.optional-dependencies]
 dev = [
-    "ruff~=0.1.4",
+    "ruff~=0.11.2",
 ]
 
-# directory inclusion
+[tool.hatch.version]
+scheme = "gradle"
+source = "gradle-properties"
+py-path = "doc/src/hexdoc_hexxyskies/__version__.py"
+key = "mod_version"
+
+[project.entry-points.hexdoc]
+hexxyskies = "hexdoc_hexxyskies._hooks:HexxySkiesPlugin"
 
 [tool.hatch.build]
 only-include = [
-    "doc/src/hexdoc_hexsky",
+    "doc/src",
     "gradle.properties",
 ]
 artifacts = [
-    "/doc/src/hexdoc_hexsky/_export/generated",
-    "/doc/src/hexdoc_hexsky/__gradle_version__.py",
+    "/doc/src/hexdoc_hexxyskies/_export/generated",
+    "/doc/src/hexdoc_hexxyskies/__gradle_version__.py",
 ]
 
 [tool.hatch.build.targets.wheel]
 sources = ["doc/src"]
-
-# hexdoc entry points
-
-[project.entry-points.hexdoc]
-hexsky = "hexdoc_hexsky._hooks:HexskyPlugin"
-
-# linting
 
 [tool.pyright]
 pythonVersion = "3.11"

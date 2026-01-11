@@ -1,6 +1,8 @@
-# hexdoc-hexsky
+# hexdoc-hexxyskies
 
-Python web book docgen and [hexdoc](https://pypi.org/project/hexdoc) plugin for Hexxy Skies.
+<a href="https://github.com/hexdoc-dev/hexdoc"><img src="https://img.shields.io/endpoint?url=https://hexxy.media/api/v0/badge/hexdoc?label=1" alt="powered by hexdoc" style="max-width:100%;"></a>
+
+[hexdoc](https://pypi.org/project/hexdoc) plugin for Hexxy Skies's web book.
 
 ## Version scheme
 
@@ -32,9 +34,9 @@ pip install -e .[dev]
 
 For local testing, create a file called `.env` in the repo root following this template:
 ```sh
-GITHUB_REPOSITORY=walksanator/hexsky
-GITHUB_SHA=main
-GITHUB_PAGES_URL=https://walksanator.github.io/hexsky/
+GITHUB_REPOSITORY=TechTastic/HexxySkies
+GITHUB_SHA=master
+GITHUB_PAGES_URL=https://techtastic.github.io/HexxySkies/
 ```
 
 Useful commands:
@@ -42,17 +44,16 @@ Useful commands:
 # show help
 hexdoc -h
 
-# render and serve the web book in watch mode
+# build, merge, and serve the web book in watch mode
 nodemon --config doc/nodemon.json
 
-# render and serve the web book
+# build, merge, and serve the web book
 hexdoc serve
 
-# export, render, and merge the web book
-hexdoc export
-hexdoc render
+# build and merge the web book
+hexdoc build
 hexdoc merge
 
-# start the Python interpreter with some extra local variables
+# start a Python interpreter with some extra local variables
 hexdoc repl
 ```

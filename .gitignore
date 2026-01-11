@@ -1,37 +1,8 @@
 # hexdoc
-_site/
-_checkout/
+
+/_site/
 __gradle_version__.py
 .hexdoc*/
-
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
-.project
-
-# idea
-out
-*.ipr
-*.iws
-*.iml
-.idea
-
-# gradle
-build
-.gradle
-
-# other
-eclipse
-run
-
-# Files from Forge MDK
-forge*changelog.txt
-
-Session.vim
-plot/
 
 # Python
 
@@ -160,7 +131,6 @@ celerybeat.pid
 .env
 .venv
 env/
-!/common/src/main/java/net/walksanator/hexxyskies/mixin/env
 venv/
 ENV/
 env.bak/
@@ -190,14 +160,8 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# Project exclude paths
-/.gradle/
-/common/build/
-/fabric/.gradle/
-/fabric/build/
-/forge/.gradle/
-/forge/build/
-/fabric/run/
-/forge/run/
-/common/.gradle/
-.idea/
+.idea
+build
+.gradle
+run
+.kotlin
