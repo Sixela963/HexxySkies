@@ -9,7 +9,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:assemble",
       "anchor": "hexxyskies:assemble",
-      "input": "[vec]",
+      "input": "[pos]",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.assemble"
     },
@@ -25,7 +25,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:force/world",
       "anchor": "hexxyskies:force/world",
-      "input": "ship, vec, vec",
+      "input": "ship, force, torque",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.force.world"
     },
@@ -33,7 +33,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:torque/world",
       "anchor": "hexxyskies:torque/world",
-      "input": "ship, vec",
+      "input": "ship, torque",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.torque.world"
     },
@@ -41,7 +41,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:force/body",
       "anchor": "hexxyskies:force/body",
-      "input": "ship, vec, vec",
+      "input": "ship, force, pos",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.force.body"
     },
@@ -49,7 +49,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:torque/body",
       "anchor": "hexxyskies:torque/body",
-      "input": "ship, vec",
+      "input": "ship, torque",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.torque.body"
     },
@@ -57,7 +57,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:force/model",
       "anchor": "hexxyskies:force/model",
-      "input": "ship, vec, vec",
+      "input": "ship, force, pos",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.force.model"
     },
@@ -65,7 +65,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:torque/model",
       "anchor": "hexxyskies:torque/model",
-      "input": "ship, vec",
+      "input": "ship, torque",
       "output": "",
       "text": "hexxyskies.page.navimancy.patterns.spells.torque.model"
     }

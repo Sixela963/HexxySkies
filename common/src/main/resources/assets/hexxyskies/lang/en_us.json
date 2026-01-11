@@ -29,6 +29,9 @@
   "hexcasting.action.hexxyskies:disembark": "Disembark",
   "hexxyskies.page.navimancy.interop.hexal.disembark": "Moves the casting Wisp into $(l:basics/navimancy#hexxyskies:page/space/world)World Space$().",
 
+  "hexxyskies.entry.navimancy.interop.hexical": "Hexical Navimancy",
+  "hexxyskies.page.navimancy.interop.hexical.assemble": "Takes a mesh and creates a $(thing)Ship$() from its points. All positions must be in ambit. The cost is one shard per position.",
+
   "hexxyskies.entry.navimancy.interop.hexodus": "Hexodus Navimancy",
   "hexxyskies.entry.navimancy.interop.hexodus.change_gravity": "Takes a $(thing)Ship$(), an axial vector for new gravity, and a strength scalar relative to standard pull.",
   "hexxyskies.entry.navimancy.interop.hexodus.get_duration": "Pushes the remaining twentieths of a second that $(l:interop/hexodus_navimancy#hexodus:change_gravity)$(action)Gravitate$() will affect a $(thing)Ship$(). Zero if the $(thing)Ship$() is not under the effects of $(l:interop/hexodus_navimancy#hexodus:change_gravity)$(action)Gravitate$().",

@@ -24,7 +24,7 @@ object HexxySkies {
         HexxySkiesIotas.register()
         HexxySkiesPatterns.register()
 
-        if (Platform.isModLoaded("complexhex") || Platform.isModLoaded("moreiotas") || Platform.isModLoaded("hexal") || Platform.isModLoaded("hexodus"))
+        if (Platform.isModLoaded("complexhex") || Platform.isModLoaded("moreiotas") || Platform.isModLoaded("hexal") || Platform.isModLoaded("hexodus") || Platform.isModLoaded("hexical"))
             PatchouliAPI.get().setConfigFlag(HexInterop.PATCHOULI_ANY_INTEROP_FLAG, true)
 
         TickEvent.SERVER_LEVEL_POST.register(DelayedAssemblyHelper::onTick)
