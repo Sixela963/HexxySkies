@@ -10,7 +10,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexodus:change_gravity",
       "anchor": "hexodus:change_gravity",
-      "input": "ship, vector, number",
+      "input": "ship, axis_angle, num",
       "output": "",
       "text": "hexxyskies.entry.navimancy.interop.hexodus.change_gravity"
     },
@@ -19,7 +19,7 @@
       "op_id": "hexodus:get_duration",
       "anchor": "hexodus:get_duration",
       "input": "ship",
-      "output": "number",
+      "output": "num",
       "text": "hexxyskies.entry.navimancy.interop.hexodus.get_duration"
     },
     {
@@ -27,7 +27,7 @@
       "op_id": "hexodus:get_direction",
       "anchor": "hexodus:get_direction",
       "input": "ship",
-      "output": "vector",
+      "output": "vec",
       "text": "hexxyskies.entry.navimancy.interop.hexodus.get_direction"
     },
     {
@@ -35,7 +35,7 @@
       "op_id": "hexodus:get_strength",
       "anchor": "hexodus:get_strength",
       "input": "ship",
-      "output": "number",
+      "output": "num",
       "text": "hexxyskies.entry.navimancy.interop.hexodus.get_strength"
     },
     {
@@ -43,7 +43,7 @@
       "op_id": "hexodus:get_true_direction",
       "anchor": "hexodus:get_true_direction",
       "input": "ship",
-      "output": "vector",
+      "output": "vec",
       "text": "hexxyskies.entry.navimancy.interop.hexodus.get_true_direction"
     },
     {
@@ -51,7 +51,7 @@
       "op_id": "hexodus:get_true_strength",
       "anchor": "hexodus:get_true_strength",
       "input": "ship",
-      "output": "number",
+      "output": "num",
       "text": "hexxyskies.entry.navimancy.interop.hexodus.get_true_strength"
     }
   ]
