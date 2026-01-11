@@ -32,7 +32,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
       python-version: '3.11'
-      release: ${{ inputs.publish }} == 'true'
+      release: inputs.publish == true
 
   publish-docs-pypi:
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: ${{ inputs.publish }} == 'true'
+    if: inputs.publish == true
     environment:
       name: publishing
     permissions:
@@ -77,11 +77,9 @@ jobs:
         run: ./gradlew build
 
       - name: Publish mod
-        if: ${{ inputs.publish }} == 'true'
         run: ./gradlew forge:publishMods fabric:publishMods
 
       - name: Login to Azure
-        if: ${{ inputs.publish }} == 'true'
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -89,7 +87,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Get Azure access token
-        if: ${{ inputs.publish }} == 'true'
         id: get-token
         run: |
           token=$(az account get-access-token --query accessToken --resource 499b84ac-1321-427f-aa17-267ca6975798 --output tsv)
@@ -97,7 +94,6 @@ jobs:
           echo "token=$token" >> "$GITHUB_OUTPUT"
 
       - name: Publish to ${{ inputs.dry_run && 'Maven Local' || 'Maven' }}
-        if: ${{ inputs.publish }} == 'true'
         env:
           MAVEN_PASSWORD: ${{ steps.get-token.outputs.token }}
         run: ./gradlew ${{ inputs.dry_run && 'publishToMavenLocal' || 'publish' }}
