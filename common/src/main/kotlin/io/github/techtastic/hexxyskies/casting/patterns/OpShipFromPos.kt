@@ -6,6 +6,7 @@ import at.petrak.hexcasting.api.casting.getBlockPos
 import at.petrak.hexcasting.api.casting.iota.Iota
 import io.github.techtastic.hexxyskies.casting.iota.ShipIota
 import io.github.techtastic.hexxyskies.casting.mishaps.MishapNotOnShip
+import io.github.techtastic.hexxyskies.util.AssertionUtils.assertShipInRange
 import org.valkyrienskies.core.api.util.GameTickOnly
 import org.valkyrienskies.mod.common.getLoadedShipManagingPos
 import org.valkyrienskies.mod.common.util.toJOMLD
@@ -19,7 +20,9 @@ object OpShipFromPos : ConstMediaAction {
         val pos = args.getBlockPos(0, argc)
         env.assertPosInRange(pos)
 
-        return env.world.getLoadedShipManagingPos(pos.toJOMLD())
-            ?.let { ShipIota(it.id, it.slug) }?.let { listOf(it) } ?: throw MishapNotOnShip(pos.center)
+        val ship = env.world.getLoadedShipManagingPos(pos.toJOMLD()) ?: throw MishapNotOnShip(pos.center)
+        env.assertShipInRange(ship)
+
+        return listOf(ShipIota(ship.id, ship.slug))
     }
 }

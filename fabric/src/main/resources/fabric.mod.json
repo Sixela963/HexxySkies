@@ -1,39 +1,41 @@
 {
   "schemaVersion": 1,
-  "id": "${mod_id}",
+  "id": "hexxyskies",
   "version": "${version}",
-  "name": "${mod_name}",
-  "description": "${mod_description}",
+  "name": "Hexxy Skies",
+  "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "TechTastic",
-    "walksanator"
+    "Me!"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "${source}"
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "${license}",
-  "icon": "assets/${mod_id}/icon.png",
+  "license": "MIT",
+  "icon": "assets/hexxyskies/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.techtastic.hexxyskies.fabric.HexxySkiesFabric"
+      {
+        "adapter": "kotlin",
+        "value": "io.github.techtastic.hexxyskies.fabric.HexxySkiesFabric"
+      }
     ],
     "client": [
-      "io.github.techtastic.hexxyskies.fabric.client.HexxySkiesFabricClient"
+      {
+        "adapter": "kotlin",
+        "value": "io.github.techtastic.hexxyskies.fabric.client.HexxySkiesFabricClient"
+      }
     ]
   },
   "mixins": [
-    "hexxyskies-common.mixins.json",
     "hexxyskies.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.24",
+    "fabricloader": ">=0.18.0",
     "minecraft": "~1.20.1",
     "java": ">=17",
-    "architectury": ">=9.1.12",
-    "fabric-api": "*",
-    "valkyrienskies": ">=${vs2_version}",
-    "hexcasting": ">=${hexcasting_version}"
+    "architectury": ">=9.2.14",
+    "fabric-api": "*"
   }
 }
