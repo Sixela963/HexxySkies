@@ -67,7 +67,7 @@
   "hexcasting.action.hexxyskies:velocity/angular": "Gait Purification II",
   "hexxyskies.page.navimancy.patterns.velocity.angular": "Returns the $(thing)Ship$()'s angular velocity.",
   "hexcasting.action.hexxyskies:aabb": "Site Purification",
-  "hexxyskies.page.navimancy.patterns.aabb": "Returns the minimum and maximum corners of the $(thing)Ship$()'s AABB.",
+  "hexxyskies.page.navimancy.patterns.aabb": "Returns the minimum and maximum corners of the $(thing)Ship$()'s AABB in $(l:basics/navimancy#hexxyskies:page/space/model_body)Model Space$().$(br2)Maybe using this with $(thing)Hexstruction$() would allow you to disassemble the Ship...",
 
   "hexxyskies.entry.navimancy.patterns.spells": "Applied Navimancy",
   "hexcasting.action.hexxyskies:assemble": "Assemble",
