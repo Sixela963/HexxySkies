@@ -32,7 +32,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
       python-version: '3.11'
-      release: inputs.publish
+      release: ${{ inputs.publish == 'true' }}
 
   publish-docs-pypi:
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: inputs.publish
+    if: ${{ inputs.publish == 'true' }}
     environment:
       name: publishing
     permissions:
