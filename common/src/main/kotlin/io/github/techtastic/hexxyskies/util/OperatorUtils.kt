@@ -70,15 +70,12 @@ object OperatorUtils {
     }
 
     @JvmStatic
-    fun checkAndMarkGivenForces(userData: CompoundTag, ship: Ship): Boolean {
+    fun checkAndMarkGivenForces(userData: CompoundTag, ship: Ship): Int {
         val marked = userData.getOrCreateCompound(HexAPI.MARKED_MOVED_USERDATA)
         val name = "Ship#${ship.id}"
-        return if (marked.contains(name)) {
-            true
-        } else {
-            marked.putBoolean(name, true)
-            userData.putCompound(HexAPI.MARKED_MOVED_USERDATA, marked)
-            false
-        }
+        val repeat = if (marked.contains(name)) marked.getInt(name) + 1 else 1
+        marked.putInt(name, repeat)
+        userData.putCompound(HexAPI.MARKED_MOVED_USERDATA, marked)
+        return repeat
     }
 }

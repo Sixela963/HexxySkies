@@ -13,6 +13,7 @@ import io.github.techtastic.hexxyskies.util.OperatorUtils
 import io.github.techtastic.hexxyskies.util.OperatorUtils.getLoadedShip
 import io.github.techtastic.hexxyskies.util.OperatorUtils.getShip
 import net.minecraft.nbt.CompoundTag
+import org.joml.Vector3d
 import org.joml.Vector3dc
 import org.valkyrienskies.core.api.ships.properties.ShipId
 import org.valkyrienskies.core.api.util.GameTickOnly
@@ -21,6 +22,7 @@ import org.valkyrienskies.mod.common.dimensionId
 import org.valkyrienskies.mod.common.util.GameToPhysicsAdapter
 import org.valkyrienskies.mod.common.util.toJOML
 import org.valkyrienskies.mod.common.util.toMinecraft
+import kotlin.math.pow
 
 class OpShipApply(val type: Type, val reference: Reference): SpellAction {
     override val argc: Int
@@ -43,19 +45,14 @@ class OpShipApply(val type: Type, val reference: Reference): SpellAction {
         if (reference != Reference.BODY)
             pos?.let(env::assertVecInRange)
 
-        var motionForCost = when (env) {
-            is CircleCastEnv -> target.inertiaData.mass / 10
-            else -> motion.lengthSqr().coerceAtMost(
-                motion.toJOML().dot(
-                    when (type) {
-                        Type.FORCE -> target.velocity
-                        Type.TORQUE -> target.angularVelocity
-                    }
-                )
-            )
-        }
-        if (OperatorUtils.checkAndMarkGivenForces(userData, target))
-            motionForCost++
+        val motionForCost = motion.lengthSqr().coerceAtMost(
+            motion.toJOML().dot(
+                when (type) {
+                    Type.FORCE -> target.velocity.min(UNIT_VECTOR, Vector3d())
+                    Type.TORQUE -> target.angularVelocity.min(UNIT_VECTOR, Vector3d())
+                }
+            )).pow(OperatorUtils.checkAndMarkGivenForces(userData, target))
+
         return SpellAction.Result(
             when (type) {
                 Type.FORCE -> ForceSpell(gtpa, reference, target.id, motion.toJOML(), pos!!.toJOML())
@@ -75,6 +72,10 @@ class OpShipApply(val type: Type, val reference: Reference): SpellAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         throw IllegalStateException()
+    }
+
+    companion object {
+        val UNIT_VECTOR = Vector3d(1.0, 1.0, 1.0)
     }
 
     private data class ForceSpell(val gtpa: GameToPhysicsAdapter, val reference: Reference, val target: ShipId, val motion: Vector3dc, val pos: Vector3dc) : RenderedSpell {
