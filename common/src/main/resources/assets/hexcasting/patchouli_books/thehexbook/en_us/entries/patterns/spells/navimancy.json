@@ -27,6 +27,10 @@
       "text": "hexxyskies.page.navimancy.patterns.spells.force.explanation"
     },
     {
+      "type": "patchouli:text",
+      "text": "hexxyskies.page.navimancy.patterns.spells.force.explanation2"
+    },
+    {
       "type": "hexcasting:pattern",
       "op_id": "hexxyskies:force/world",
       "anchor": "hexxyskies:force/world",
