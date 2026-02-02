@@ -11,6 +11,8 @@ import io.github.techtastic.hexxyskies.util.AssertionUtils.assertShipInRange
 import io.github.techtastic.hexxyskies.util.OperatorUtils.getShip
 import org.valkyrienskies.core.api.ships.ServerShip
 import org.valkyrienskies.core.api.ships.Ship
+import org.valkyrienskies.mod.api.positionToShip
+import org.valkyrienskies.mod.api.positionToWorld
 import org.valkyrienskies.mod.common.entity.handling.DefaultShipyardEntityHandler
 import ram.talia.hexal.api.casting.eval.env.WispCastEnv
 import ram.talia.hexal.common.entities.BaseCastingWisp
@@ -34,10 +36,11 @@ class OpShipyardWisp(val toShipyard: Boolean) : SpellAction {
 
     private data class Spell(val wisp: BaseCastingWisp, val ship: Ship, val toShipyard: Boolean) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            if (toShipyard)
-                DefaultShipyardEntityHandler.moveEntityFromWorldToShipyard(wisp, ship)
-            else
-                DefaultShipyardEntityHandler.entityRemovedFromShipyard(wisp, ship)
+            if (toShipyard) {
+                wisp.moveTo(ship.positionToShip(wisp.position()))
+            } else {
+                wisp.moveTo(ship.positionToWorld(wisp.position()))
+            }
         }
     }
 }

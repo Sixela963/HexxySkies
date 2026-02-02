@@ -12,6 +12,7 @@ import net.minecraft.world.phys.Vec3
 import org.valkyrienskies.core.api.ships.LoadedServerShip
 import org.valkyrienskies.core.api.util.GameTickOnly
 import org.valkyrienskies.mod.api.toMinecraft
+import org.valkyrienskies.mod.common.getLoadedShipManagingPos
 import org.valkyrienskies.mod.common.getShipsIntersecting
 
 object OpGetShipsBy : ConstMediaAction {
@@ -26,7 +27,7 @@ object OpGetShipsBy : ConstMediaAction {
 
         val aabb = AABB(pos.add(Vec3(-radius, -radius, -radius)), pos.add(Vec3(radius, radius, radius)))
         val entitiesGot = env.world.getShipsIntersecting(aabb)
-            .filterIsInstance<LoadedServerShip>()
+            .mapNotNull { env.world.getLoadedShipManagingPos(it.transform.positionInShip) }
             .sortedBy { it.transform.positionInWorld.toMinecraft().distanceToSqr(pos) }
         return entitiesGot.map { ShipIota(it.id, it.slug) }.asActionResult
     }

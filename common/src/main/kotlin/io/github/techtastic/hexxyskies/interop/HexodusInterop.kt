@@ -41,7 +41,7 @@ object HexodusInterop {
         val strength = args.getPositiveDoubleUnderInclusive(2, 5.0, argc)
         return SpellAction.Result(
             ShipGravitateSpell(serverShip, direction, strength),
-            MediaConstants.CRYSTAL_UNIT,
+            (MediaConstants.DUST_UNIT * serverShip.inertiaData.mass).toLong(),
             listOf(ParticleSpray.burst(ship.transform.positionInWorld.toMinecraft(), 10.0))
         )
     }

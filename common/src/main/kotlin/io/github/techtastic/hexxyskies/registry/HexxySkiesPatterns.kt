@@ -12,7 +12,6 @@ import io.github.techtastic.hexxyskies.casting.patterns.complexhex.OpShipGetId
 import io.github.techtastic.hexxyskies.casting.patterns.complexhex.OpShipGetRot
 import io.github.techtastic.hexxyskies.casting.patterns.hexal.OpShipyardWisp
 import io.github.techtastic.hexxyskies.casting.patterns.moreiotas.OpShipGetMatrix
-import io.github.techtastic.hexxyskies.casting.patterns.moreiotas.OpShipGetSlug
 import io.github.techtastic.hexxyskies.casting.patterns.spells.OpAssemble
 import io.github.techtastic.hexxyskies.casting.patterns.spells.OpShipApply
 import io.github.techtastic.hexxyskies.casting.patterns.spells.OpShipSetScale
@@ -92,24 +91,24 @@ object HexxySkiesPatterns {
         OpShipApply(OpShipApply.Type.TORQUE, OpShipApply.Reference.WORLD)
     ) }
 
-    val APPLY_BODY_FORCE = ACTIONS.register("force/body") { ActionRegistryEntry(
-        HexPattern.fromAngles("qwwqawwweqwaeawqaw", HexDir.SOUTH_EAST),
-        OpShipApply(OpShipApply.Type.FORCE, OpShipApply.Reference.BODY)
-    ) }
-
-    val APPLY_BODY_TORQUE = ACTIONS.register("torque/body") { ActionRegistryEntry(
-        HexPattern.fromAngles("wdewwedwqqqadeeed", HexDir.EAST),
-        OpShipApply(OpShipApply.Type.TORQUE, OpShipApply.Reference.BODY)
-    ) }
-
     val APPLY_MODEL_FORCE = ACTIONS.register("force/model") { ActionRegistryEntry(
-        HexPattern.fromAngles("wdewwedwaqwaea", HexDir.EAST),
+        HexPattern.fromAngles("qwwqawwweqwaeawqaw", HexDir.SOUTH_EAST),
         OpShipApply(OpShipApply.Type.FORCE, OpShipApply.Reference.MODEL)
     ) }
 
     val APPLY_MODEL_TORQUE = ACTIONS.register("torque/model") { ActionRegistryEntry(
-        HexPattern.fromAngles("wdewwedweweedaqqqa", HexDir.EAST),
+        HexPattern.fromAngles("wdewwedwqqqadeeed", HexDir.EAST),
         OpShipApply(OpShipApply.Type.TORQUE, OpShipApply.Reference.MODEL)
+    ) }
+
+    val APPLY_BODY_FORCE = ACTIONS.register("force/body") { ActionRegistryEntry(
+        HexPattern.fromAngles("wdewwedwaqwaea", HexDir.EAST),
+        OpShipApply(OpShipApply.Type.FORCE, OpShipApply.Reference.BODY)
+    ) }
+
+    val APPLY_BODY_TORQUE = ACTIONS.register("torque/body") { ActionRegistryEntry(
+        HexPattern.fromAngles("wdewwedweweedaqqqa", HexDir.EAST),
+        OpShipApply(OpShipApply.Type.TORQUE, OpShipApply.Reference.BODY)
     ) }
 
     // ComplexHex
@@ -150,12 +149,6 @@ object HexxySkiesPatterns {
         ACTIONS.register("matrix/moment_of_inertia_tensor") { ActionRegistryEntry(
             HexPattern.fromAngles("ewwedwwwqdawdw", HexDir.SOUTH_WEST),
             OpShipGetMatrix(OpShipGetMatrix.Type.MOMENT_OF_INERTIA_TENSOR)
-        ) }
-
-    val SLUG = if (!Platform.isModLoaded("moreiotas")) null else
-        ACTIONS.register("slug") { ActionRegistryEntry(
-            HexPattern.fromAngles("wdewwedwqeqawqa", HexDir.EAST),
-            OpShipGetSlug
         ) }
 
     // Hexal

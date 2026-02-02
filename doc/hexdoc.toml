@@ -16,6 +16,7 @@ resource_dirs = [  # top takes priority
     # other hexdoc plugins
     { modid="hexcasting" },
     { modid="hexodus" },
+    { modid="moreiotas" },
     { modid="minecraft" },
     { modid="hexdoc" },
 ]
@@ -25,6 +26,7 @@ export_dir = "src/hexdoc_hexxyskies/_export/generated"
 icon = "icon.png"
 include = [
     "hexxyskies",
+    "moreiotas",
     "hexodus",
     "hexcasting",
     "hexdoc",

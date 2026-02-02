@@ -7,12 +7,11 @@
     "hexical.MixinLesserSentinelRenderer"
   ],
   "mixins": [
-    "MixinOpTeleport",
-    "MixinOpTeleport$Spell",
     "hexical.MixinPedestalBlockEntity",
     "hexodus.MixinOpChangeGravity",
     "hexodus.MixinOpGetGravity",
-    "hexodus.MixinOpGetTrueGravity"
+    "hexodus.MixinOpGetTrueGravity",
+    "moreiotas.MixinOpNameGet"
   ],
   "injectors": {
     "defaultRequire": 1

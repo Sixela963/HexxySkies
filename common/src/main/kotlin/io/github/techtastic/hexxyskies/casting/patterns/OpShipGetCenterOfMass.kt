@@ -20,7 +20,7 @@ class OpShipGetCenterOfMass(private val type: Type) : ConstMediaAction {
         env.assertShipInRange(ship)
         return listOf(Vec3Iota((when (type) {
             Type.WORLD -> ship.transform.positionInWorld
-            Type.MODEL -> ship.transform.positionInModel
+            Type.MODEL -> ship.transform.positionInShip
         }).toMinecraft()))
     }
 

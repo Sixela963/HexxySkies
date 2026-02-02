@@ -100,6 +100,7 @@ dependencies {
     }
 
     modRuntimeOnly ("ram.talia.moreiotas:moreiotas-fabric-$minecraft_version:$moreiotas_version") { transitive = false }
+    runtimeOnly group: "org.jblas", name: "jblas", version: "1.2.5"
     modRuntimeOnly("maven.modrinth:complex-hex:$complexhex_version")
     modRuntimeOnly("curse.maven:hexstructuction-1283004:$hexstruction_version")
     modRuntimeOnly("ram.talia.hexal:hexal-fabric-$minecraft_version:$hexal_version") { transitive = false }
@@ -115,7 +116,10 @@ processResources {
     inputs.property 'version', project.version
 
     filesMatching('fabric.mod.json') {
-        expand version: inputs.properties.version
+        expand version: inputs.properties.version, hexcasting_version: hexcasting_version, moreiotas_version: moreiotas_version,
+        hexal_version: hexal_version, hexodus_version: hexodus_version, architectury_api_version: architectury_api_version,
+        complexhex_version: (complexhex_version.contains("-") ? complexhex_version.substring(0, complexhex_version.indexOf("-")) : complexhex_version),
+        vs2_version: (vs2_version.contains("+") ? vs2_version.substring(0, vs2_version.indexOf("+")) : vs2_version), hexical_version: hexical_version
     }
 }
 

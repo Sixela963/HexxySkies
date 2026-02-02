@@ -15,7 +15,7 @@ object DelayedAssemblyHelper {
 
     fun onTick(level: ServerLevel) {
         this.toAssemble.pollUntilEmpty {
-            ShipAssembler.assembleToShip(level, it.toList(), true)
+            ShipAssembler.assembleToShip(level, it.toList(), false)
         }
     }
 }

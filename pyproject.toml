@@ -28,6 +28,7 @@ dependencies = [
     "hexdoc~=1!0.1.0a24",
     { package="hexdoc-hexcasting", op="~=", py-version="1.0.dev21", key="hexcasting_version" },
     { package="hexdoc-hexodus", op="~=", py-version="1.0.dev", key="hexodus_version" },
+    { package="hexdoc-moreiotas", op="~=", py-version="1.0.dev", key="moreiotas_version" },
     { package="hexdoc-minecraft", op="~=", py-version="1.0.dev", key="minecraft_version" },
 ]
 

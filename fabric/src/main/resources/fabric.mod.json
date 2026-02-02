@@ -37,19 +37,23 @@
     "fabricloader": ">=0.18.0",
     "minecraft": "~1.20.1",
     "java": ">=17",
-    "architectury": ">=9.2.14",
+    "architectury": ">=${architectury_api_version}",
     "fabric-api": "*",
-    "valkyrienskies": ">=2.4.0",
-    "hexcasting": ">=0.11.2"
+    "valkyrienskies": ">=${vs2_version}",
+    "hexcasting": ">=${hexcasting_version}"
   },
   "suggests": {
-    "moreiotas": ">=0.1.1",
-    "complexhex": ">=0.1.3",
-    "hexal": ">=0.3.1",
-    "hexodus": ">=1.0.0",
-    "hexical": ">=2.0.0"
+    "moreiotas": ">=${moreiotas_version}",
+    "complexhex": ">=${complexhex_version}",
+    "hexal": ">=${hexal_version}",
+    "hexodus": ">=${hexodus_version}",
+    "hexical": ">=${hexical_version}"
   },
   "breaks": {
-    "hexsky": "*"
+    "hexsky": "*",
+    "moreiotas": "<${moreiotas_version}",
+    "hexal": "<${hexal_version}",
+    "hexodus": "<${hexodus_version}",
+    "hexical": "<${hexical_version}"
   }
 }

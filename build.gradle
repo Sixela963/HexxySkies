@@ -26,6 +26,9 @@ allprojects {
         }
         maven {
             url = "https://api.modrinth.com/maven"
+            content {
+                includeGroup "maven.modrinth"
+            }
         }
         maven {
             url "https://cursemaven.com"
@@ -36,6 +39,9 @@ allprojects {
         maven {
             name = "Valkyrien Skies Internal"
             url = 'https://maven.valkyrienskies.org'
+            content {
+                excludeGroup "net.minecraftforge"
+            }
         }
     }
 
