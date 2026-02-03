@@ -55,7 +55,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: ${{ inputs.publish == 'true' }}
+    if: inputs.publish == 'true'
     environment:
       name: publishing
     permissions:
