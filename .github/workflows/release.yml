@@ -76,9 +76,9 @@ jobs:
       - name: Build mod
         run: ./gradlew build
 
-
-  publish:
+  publish-mod:
     runs-on: ubuntu-latest
+    if: inputs.publish-mod
     needs: build-mod
     environment:
       name: publishing
@@ -86,12 +86,19 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: Publish mod
-        if: inputs.publish-mod
-        run: ./gradlew forge:publishMods fabric:publishMods
+      - run: ./gradlew forge:publishMods fabric:publishMods
 
+  publish-maven:
+    runs-on: ubuntu-latest
+    if: inputs.publish-maven
+    needs: build-mod
+    environment:
+      name: publishing
+    permissions:
+      contents: read
+      id-token: write
+    steps:
       - name: Login to Azure
-        if: inputs.publish-maven
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -99,7 +106,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Get Azure access token
-        if: inputs.publish-maven
         id: get-token
         run: |
           token=$(az account get-access-token --query accessToken --resource 499b84ac-1321-427f-aa17-267ca6975798 --output tsv)
@@ -107,7 +113,6 @@ jobs:
           echo "token=$token" >> "$GITHUB_OUTPUT"
 
       - name: Publish to Maven
-        if: inputs.publish-maven
         env:
           MAVEN_PASSWORD: ${{ steps.get-token.outputs.token }}
         run: ./gradlew publish
