@@ -57,10 +57,14 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
 
-  build-mod:
+  publish-mod:
     runs-on: ubuntu-latest
+    if: inputs.publish-mod
+    environment:
+      name: publishing
     permissions:
       contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -73,31 +77,30 @@ jobs:
 
       - run: chmod +x ./gradlew
 
-      - name: Build mod
-        run: ./gradlew build
-
-  publish-mod:
-    runs-on: ubuntu-latest
-    if: inputs.publish-mod
-    needs: build-mod
-    environment:
-      name: publishing
-    permissions:
-      contents: read
-      id-token: write
-    steps:
       - run: ./gradlew forge:publishMods fabric:publishMods
 
   publish-maven:
     runs-on: ubuntu-latest
     if: inputs.publish-maven
-    needs: build-mod
     environment:
       name: publishing
     permissions:
       contents: read
       id-token: write
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: chmod +x ./gradlew
+
+      - run: ./gradlew build
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
