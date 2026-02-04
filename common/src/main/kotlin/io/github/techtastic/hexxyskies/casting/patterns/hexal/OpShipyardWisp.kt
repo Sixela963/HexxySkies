@@ -33,7 +33,7 @@ class OpShipyardWisp(val toShipyard: Boolean) : SpellAction {
         return SpellAction.Result(
             Spell(env.wisp, ship, toShipyard),
             0,
-            listOf(ParticleSpray.burst(env.wisp.eyePosition, .75))
+            listOf(ParticleSpray.burst(env.wisp.position(), .75))
         )
     }
 
@@ -41,13 +41,14 @@ class OpShipyardWisp(val toShipyard: Boolean) : SpellAction {
         @OptIn(GameTickOnly::class)
         override fun cast(env: CastingEnvironment) {
             val env = env as WispCastEnv
-            if (toShipyard) {
-                if (ship.id != env.world.getLoadedShipManagingPos(env.wisp.position().toJOML())?.id)
-                    env.wisp.moveTo(ship.positionToShip(env.wisp.position()))
-            } else {
-                if (env.world.getLoadedShipManagingPos(env.wisp.position().toJOML()) != null)
-                    env.wisp.moveTo(ship.positionToWorld(env.wisp.position()))
-            }
+            val pos = env.wisp.position()
+            val currentShip = env.world.getLoadedShipManagingPos(pos.toJOML())
+            if (toShipyard && ship.id != currentShip?.id)
+                env.wisp.moveTo(ship.positionToShip(currentShip.positionToWorld(pos)))
+            else if (currentShip == null)
+                return
+            env.wisp.moveTo(ship.positionToWorld(env.wisp.position()))
+
         }
     }
 }
