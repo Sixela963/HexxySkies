@@ -48,7 +48,6 @@ class OpShipyardWisp(val toShipyard: Boolean) : SpellAction {
             else if (currentShip == null)
                 return
             env.wisp.moveTo(ship.positionToWorld(env.wisp.position()))
-
         }
     }
 }
