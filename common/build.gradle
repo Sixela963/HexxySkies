@@ -50,7 +50,7 @@ dependencies {
     modCompileOnly("maven.modrinth:complex-hex:$complexhex_version")
     modCompileOnly("curse.maven:hexstructuction-1283004:$hexstruction_version")
     modCompileOnly("ram.talia.hexal:hexal-common-$minecraft_version:$hexal_version") { transitive = false }
-    compileOnly files("${rootProject.rootDir}/libs/hexical-2.0.0-e0d7ef9.jar")
+    modCompileOnly files("${rootProject.rootDir}/libs/hexical-2.0.0-e0d7ef9.jar")
     modCompileOnly("maven.modrinth:hexodus:$hexodus_version")
     modCompileOnly("com.github.qouteall:GravityChanger:v$gravity_changer_version-mc$minecraft_version") { transitive = false }
     modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-api:$cca_version"

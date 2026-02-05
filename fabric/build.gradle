@@ -110,7 +110,7 @@ dependencies {
     modRuntimeOnly("com.github.qouteall:GravityChanger:v$gravity_changer_version-mc$minecraft_version") {
         exclude module: "modmenu"
     }
-    runtimeOnly files("${rootProject.rootDir}/libs/lapisworks-1.5.8-beta.3.jar")
+    //runtimeOnly files("${rootProject.rootDir}/libs/lapisworks-1.5.8-beta.3.jar")
 }
 
 processResources {
