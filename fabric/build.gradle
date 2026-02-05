@@ -120,7 +120,8 @@ processResources {
         expand version: inputs.properties.version, hexcasting_version: hexcasting_version, moreiotas_version: moreiotas_version,
         hexal_version: hexal_version, hexodus_version: hexodus_version, architectury_api_version: architectury_api_version,
         complexhex_version: (complexhex_version.contains("-") ? complexhex_version.substring(0, complexhex_version.indexOf("-")) : complexhex_version),
-        vs2_version: (vs2_version.contains("+") ? vs2_version.substring(0, vs2_version.indexOf("+")) : vs2_version), hexical_version: hexical_version
+        vs2_version: (vs2_version.contains("+") ? vs2_version.substring(0, vs2_version.indexOf("+")) : vs2_version), hexical_version: hexical_version,
+        lapisworks_version: lapisworks_version
     }
 }
 
@@ -166,5 +167,6 @@ publishMods {
         optional("hexical")
         optional("hexodus")
         optional("moreiotas")
+        optional("lapisworks")
     }
 }

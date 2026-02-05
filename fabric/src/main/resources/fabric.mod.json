@@ -47,7 +47,8 @@
     "complexhex": ">=${complexhex_version}",
     "hexal": ">=${hexal_version}",
     "hexodus": ">=${hexodus_version}",
-    "hexical": ">=${hexical_version}"
+    "hexical": ">=${hexical_version}",
+    "lapisworks": ">=${lapisworks_version}"
   },
   "breaks": {
     "hexsky": "*",

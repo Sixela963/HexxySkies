@@ -83,3 +83,10 @@ mandatory = false
 versionRange = "[${hexical_version},)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.hexxyskies]]
+modId = "lapisworks"
+mandatory = false
+versionRange = "[${lapisworks_version},)"
+ordering = "AFTER"
+side = "BOTH"
